@@ -4,7 +4,14 @@
 
 A library to download and launch Sauce Connect.
 
+## Installation
+
+```sh
+npm install sauce-connect-launcher
+```
+
 ## Usage
+
 
 ```javascript
 
