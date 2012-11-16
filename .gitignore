@@ -1,0 +1,9 @@
+.DS_Store
+.tags
+lib-cov/
+lib/Sauce-Connect-latest.zip
+lib/Sauce-Connect.jar
+sauce_connect.log
+node_modules/
+npm-debug.log
+test/coverage.html

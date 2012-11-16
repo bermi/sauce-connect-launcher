@@ -1,0 +1,12 @@
+.DS_Store
+.gitignore
+.npmignore
+.tags
+lib/Sauce-Connect.jar
+lib/Sauce-Connect-latest.zip
+sauce_connect.log
+test/coverage.html
+lib-cov/
+node_modules/
+npm-debug.log
+test/
