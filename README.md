@@ -20,7 +20,8 @@ var sauceConnectLauncher = require('sauce-connect-launcher'),
 		username: 'bermi',
 		accessKey: '12345678-1234-1234-1234-1234567890ab',
 		verbose: false,
-		logger: console.log
+		logger: console.log,
+		no_progress: false // optionally hide progress bar
 	};
 
 sauceConnectLauncher(options, function (err, sauceConnectProcess) {
