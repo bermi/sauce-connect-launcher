@@ -21,6 +21,7 @@ var sauceConnectLauncher = require('sauce-connect-launcher'),
 		accessKey: '12345678-1234-1234-1234-1234567890ab',
 		verbose: false,
 		logfile: null, //optionally change sauce connect logfile location
+		tunnelIdentifier: null, // optionally identity the tunnel for concurrent tunnels
 		logger: console.log,
 		no_progress: false // optionally hide progress bar
 	};
