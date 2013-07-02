@@ -18,6 +18,7 @@
   "browser": true,
   "node": true,
   "indent": 2,
+  "quotmark": "double",
   "onevar": true,
   "white": true,
   "strict": false,

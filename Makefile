@@ -12,10 +12,10 @@ test:
 	mocha
 
 test-instrument:
-	jscoverage js js-cov
+	jscoverage lib/ lib-cov/
 
 test-clean-instrument:
-	rm -rf js-cov
+	rm -rf lib-cov/
 
 test-coverage-report:
 	COVERAGE=1 mocha --reporter html-cov > test/coverage.html
