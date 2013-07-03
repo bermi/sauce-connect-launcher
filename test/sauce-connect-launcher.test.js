@@ -5,6 +5,8 @@ var sauceConnectLauncher = require("../"),
   path = require("path"),
   sauceCreds;
 
+require("colors");
+
 describe("Sauce Connect Launcher", function () {
   var removeSauceConnect = function (done) {
     try {
@@ -60,7 +62,11 @@ describe("Sauce Connect Launcher", function () {
   });
 
   it("should work with real credentials", function (done) {
-    sauceCreds = require("../user.json");
+    try {
+      sauceCreds = require("../user.json");
+    } catch (e) {
+      console.log("Please run make setup-sauce to set up real Sauce Labs Credentials".red);
+    }
     sauceConnectLauncher(sauceCreds, function (err, sauceConnectProcess) {
       if (err) {throw err; }
       expect(sauceConnectProcess).to.be.ok();

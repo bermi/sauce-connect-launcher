@@ -33,7 +33,8 @@
     "grunt-contrib-watch": "~0.4.4",
     "grunt-contrib-jshint": "~0.6.0",
     "grunt-simple-mocha": "~0.4.0",
-    "grunt-notify": "~0.2.4"
+    "grunt-notify": "~0.2.4",
+    "colors": "~0.6.0-1"
   },
   "engines": {
     "node": ">= 0.8.x"
