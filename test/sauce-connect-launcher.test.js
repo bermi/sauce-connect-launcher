@@ -68,6 +68,7 @@ describe("Sauce Connect Launcher", function () {
       console.log("Please run make setup-sauce to set up real Sauce Labs Credentials".red);
       return done();
     }
+    sauceCreds.verbose = true;
     sauceConnectLauncher(sauceCreds, function (err, sauceConnectProcess) {
       if (err) {throw err; }
       expect(sauceConnectProcess).to.be.ok();
