@@ -35,10 +35,31 @@ sauceConnectLauncher(options, function (err, sauceConnectProcess) {
 
 ```
 
+## Development
+
+Clone the repository and run
+
+```
+make setup
+```
+
+You will be prompted for Sauce Labs credentials (used for testing).  Run
+```
+make dev
+```
+to start the watcher.
+
+
 ## Testing
 
-```sh
+```
 npm test
+```
+
+or
+
+```
+make test
 ```
 
 ## License

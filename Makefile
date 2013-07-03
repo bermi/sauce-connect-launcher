@@ -28,7 +28,12 @@ lint:
 	@grunt jshint
 
 all:
+	@make setup
 	grunt
+
+dev:
+	make all && \
+	grunt watch
 
 # Creates new releases by running these steps
 #
@@ -66,9 +71,10 @@ setup:
 			make install-grunt-release \
 		); \
 	true);
+	@make setup-sauce
 
 setup-sauce:
-	@test -d user.json || (\
+	@test -f user.json || (\
 		read -p "Sauce Labs Username: " name && \
 		read -p "Sauce Labs Access key: " key && \
 		echo "{\"username\": \"$$name\", \"accessKey\": \"$$key\"}" > user.json \

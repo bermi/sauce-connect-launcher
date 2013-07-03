@@ -2,7 +2,8 @@
 var sauceConnectLauncher = require("../"),
   expect = require("expect.js"),
   fs = require("fs"),
-  path = require("path");
+  path = require("path"),
+  sauceCreds;
 
 describe("Sauce Connect Launcher", function () {
   var removeSauceConnect = function (done) {
@@ -18,9 +19,10 @@ describe("Sauce Connect Launcher", function () {
   before(removeSauceConnect);
   after(removeSauceConnect);
 
+  this.timeout(3600 * 10000);
+
   it("should download Sauce Connect", function (done) {
     // We need to allow enough time for downloading Sauce Connect
-    this.timeout(3600 * 10000);
     var log = [];
     sauceConnectLauncher({
       // We wont use real credentials, the point is to
@@ -53,6 +55,16 @@ describe("Sauce Connect Launcher", function () {
 
       expect(err).to.be.an(Error);
 
+      done();
+    });
+  });
+
+  it("should work with real credentials", function (done) {
+    sauceCreds = require("../user.json");
+    sauceConnectLauncher(sauceCreds, function (err, sauceConnectProcess) {
+      if (err) {throw err; }
+      expect(sauceConnectProcess).to.be.ok();
+      sauceConnectLauncher.kill();
       done();
     });
   });
