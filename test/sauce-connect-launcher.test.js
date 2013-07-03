@@ -38,7 +38,7 @@ describe("Sauce Connect Launcher", function () {
         log.push(message);
       }
     }, function (err, sauceConnectProcess) {
-
+      console.log(err.message);
       sauceConnectProcess.close();
 
       // Expected command sequence

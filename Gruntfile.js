@@ -37,7 +37,7 @@ module.exports = function (grunt) {
     },
     release: {
       options: {
-        npm: false
+        npm: true
       }
     }
   });
