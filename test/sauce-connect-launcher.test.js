@@ -66,6 +66,7 @@ describe("Sauce Connect Launcher", function () {
       sauceCreds = require("../user.json");
     } catch (e) {
       console.log("Please run make setup-sauce to set up real Sauce Labs Credentials".red);
+      return done();
     }
     sauceConnectLauncher(sauceCreds, function (err, sauceConnectProcess) {
       if (err) {throw err; }
