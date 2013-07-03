@@ -13,6 +13,7 @@
   "noempty": true,
   "sub": true,
   "undef": true,
+  "unused": true,
   "trailing": true,
   "eqnull": true,
   "browser": true,

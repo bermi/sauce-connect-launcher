@@ -7,7 +7,10 @@ var sauceConnectLauncher = require("../"),
 describe("Sauce Connect Launcher", function () {
   var removeSauceConnect = function (done) {
     try {
-      fs.unlinkSync(path.normalize(__dirname + "/../lib/Sauce-Connect-latest.jar"));
+      fs.unlinkSync(path.normalize(__dirname + "/../lib/Sauce-Connect.jar"));
+    } catch (e) { }
+    try {
+      fs.unlinkSync(path.normalize(__dirname + "/../lib/Sauce-Connect-latest.zip"));
     } catch (e) { }
     done();
   };
@@ -39,7 +42,6 @@ describe("Sauce Connect Launcher", function () {
         "Missing Sauce Connect local proxy, downloading dependency",
         "This will only happen once.",
         "Downloading ",
-        undefined,
         "\n",
         "Unzipping Sauce-Connect-latest.zip",
         "Saving Sauce-Connect.jar",
