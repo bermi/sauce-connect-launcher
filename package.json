@@ -17,7 +17,7 @@
     "url": "https://github.com/bermi/sauce-connect-launcher"
   },
   "scripts": {
-    "test": "mocha"
+    "test": "mocha --reporter spec"
   },
   "dependencies": {
     "unzip": "0.0.4",
