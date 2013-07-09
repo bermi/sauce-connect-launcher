@@ -35,6 +35,10 @@ sauceConnectLauncher(options, function (err, sauceConnectProcess) {
 
 ```
 
+### Credentials
+
+You can also pass the credentials as SAUCE_CONNECT_USERNAME and SAUCE_CONNECT_ACCESSKEY environment variables.
+
 ## Development
 
 Clone the repository and run
