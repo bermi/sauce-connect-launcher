@@ -3,9 +3,23 @@ var sauceConnectLauncher = require("../"),
   expect = require("expect.js"),
   fs = require("fs"),
   path = require("path"),
-  sauceCreds;
+  sauceCreds,
+  verbose = process.env.VERBOSE_TESTS || false;
 
-require("colors");
+try {
+  sauceCreds = require("../user.json");
+  sauceCreds.verbose = verbose;
+  sauceCreds.log = [];
+  sauceCreds.logger = function (message) {
+    if (verbose) {
+      console.log("[info] ", message);
+    }
+    sauceCreds.log.push(message);
+  };
+} catch (e) {
+  require("colors");
+  console.log("Please run make setup-sauce to set up real Sauce Labs Credentials".red);
+}
 
 describe("Sauce Connect Launcher", function () {
   var removeSauceConnect = function (done) {
@@ -32,13 +46,18 @@ describe("Sauce Connect Launcher", function () {
       // sauce
       username: "bermi",
       accessKey: "12345678-1234-1234-1234-1234567890ab",
-      verbose: true,
+      verbose: verbose,
       logger: function (message) {
-        console.log("[info] ", message);
+        if (verbose) {
+          console.log("[info] ", message);
+        }
         log.push(message);
       }
     }, function (err, sauceConnectProcess) {
-      console.log(err.message);
+      if (err) {
+        console.log(err.message);
+      }
+
       sauceConnectProcess.close();
 
       // Expected command sequence
@@ -46,9 +65,7 @@ describe("Sauce Connect Launcher", function () {
         "Missing Sauce Connect local proxy, downloading dependency",
         "This will only happen once.",
         "Downloading ",
-        "\n",
         "Unzipping Sauce-Connect-latest.zip",
-        "Saving Sauce-Connect.jar",
         "Removing Sauce-Connect-latest.zip",
         "Sauce Connect installed correctly",
         "Opening local tunnel using Sauce Connect",
@@ -61,20 +78,16 @@ describe("Sauce Connect Launcher", function () {
     });
   });
 
-  it("should work with real credentials", function (done) {
-    try {
-      sauceCreds = require("../user.json");
-    } catch (e) {
-      console.log("Please run make setup-sauce to set up real Sauce Labs Credentials".red);
-      return done();
-    }
-    sauceCreds.verbose = true;
-    sauceConnectLauncher(sauceCreds, function (err, sauceConnectProcess) {
-      if (err) {throw err; }
-      expect(sauceConnectProcess).to.be.ok();
-      sauceConnectLauncher.kill();
-      done();
+  if (sauceCreds) {
+    it("should work with real credentials", function (done) {
+      sauceConnectLauncher(sauceCreds, function (err, sauceConnectProcess) {
+        if (err) { throw err; }
+        expect(sauceConnectProcess).to.be.ok();
+        sauceConnectLauncher.kill();
+        expect(sauceCreds.log).to.contain("Testing tunnel ready", "Closing Sauce Connect Tunnel");
+        done();
+      });
     });
-  });
+  }
 
 });
