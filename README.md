@@ -39,6 +39,13 @@ sauceConnectLauncher(options, function (err, sauceConnectProcess) {
 
 You can also pass the credentials as SAUCE_CONNECT_USERNAME and SAUCE_CONNECT_ACCESSKEY environment variables.
 
+You can also create a user.json file in your current working directory with the username and key
+
+user.json
+```
+{"username": "bermi", "accessKey": "12345678-1234-1234-1234-1234567890ab"}
+```
+
 ## Development
 
 Clone the repository and run
