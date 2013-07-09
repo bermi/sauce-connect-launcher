@@ -37,7 +37,7 @@ sauceConnectLauncher(options, function (err, sauceConnectProcess) {
 
 ### Credentials
 
-You can also pass the credentials as SAUCE_CONNECT_USERNAME and SAUCE_CONNECT_ACCESSKEY environment variables.
+You can also pass the credentials as SAUCE_USERNAME and SAUCE_ACCESS_KEY environment variables.
 
 You can also create a user.json file in your current working directory with the username and key
 
