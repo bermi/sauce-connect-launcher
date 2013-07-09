@@ -1,39 +1,35 @@
 SHELL = /bin/bash
 export PATH := ./node_modules/.bin/:${PATH}
 
-# The default action will lint the code and run all the tests
-default: ci
-
 # Shows available commands
 help:
 	@make -qp | grep '^[^\# \n\\.]' | grep '^[a-z]' | grep -v '=' | cut -f1 -d ":" | sort
 
 test:
-	mocha
-
-test-instrument:
-	jscoverage lib/ lib-cov/
-
-test-clean-instrument:
-	rm -rf lib-cov/
-
-test-coverage-report:
-	COVERAGE=1 mocha --reporter html-cov > test/coverage.html
-
-test-coverage: test-clean-instrument test-instrument test-coverage-report
+	@make setup
+	@make clean
+	@mocha --reporter spec $(MOCHAFLAGS)
 
 # Lints the code
 lint:
-	@make setup
 	@grunt jshint
 
 all:
 	@make setup
-	grunt
+	@grunt
 
 dev:
-	make all && \
+	@make all && \
 	grunt watch
+
+clean:
+	@rm -f lib/Sauce-Connect.jar \
+		lib/Sauce-Connect-latest.zip \
+		lib/NOTICE.txt lib/license.html \
+		lib/readyfile \
+		sauce_connect.log* \
+		npm-debug.log
+
 
 # Creates new releases by running these steps
 #
@@ -41,11 +37,15 @@ dev:
 # 2. stage the package.json file's change.
 # 3. commit that change with a message like "release 0.6.22".
 # 4. create a new git tag for the release.
-# 5. push the changes out to bitbucket.
-# 6. also push the new tag out to bitbucket.
+# 5. push the changes out to github.
+# 6. also push the new tag out to github.
+# 7. publish to npm.
 release:
 	@make install-grunt-release
-	@make ci
+	@make lint
+	@make test
+	@make clean
+	@rm -f user.json
 	@grunt release$(RELEASEFLAGS)
 
 # Releases updating only the patch number 0.0.#
@@ -89,8 +89,4 @@ install-grunt-release:
 version:
 	node -e "console.log(require('./package.json').version)"
 
-# Continuous Integration Test Runner
-ci:
-	@TESTEMFLAGS=ci make test
-
-.PHONY: default test test-coverage test-clean-instrument test-instrument test-coverage-report help setup ci release release-major release-minor release-patch
+.PHONY: default test clean help setup release release-major release-minor release-patch
