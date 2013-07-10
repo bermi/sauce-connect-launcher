@@ -7,7 +7,9 @@ var sauceConnectLauncher = require("../"),
   verbose = process.env.VERBOSE_TESTS || false;
 
 try {
-  sauceCreds = require("../user.json");
+  // When environment variables for SAUCE are found, we don't need
+  // to generate a user.json file
+  sauceCreds = process.env.SAUCE_ACCESS_KEY ? {} : require("../user.json");
   sauceCreds.verbose = verbose;
   sauceCreds.log = [];
   sauceCreds.logger = function (message) {

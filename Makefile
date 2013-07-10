@@ -74,12 +74,14 @@ setup:
 	@make setup-sauce
 
 setup-sauce:
+	@[[ $$SAUCE_ACCESS_KEY && $$SAUCE_USERNAME ]] || make generate-user-file
+
+generate-user-file:
 	@test -f user.json || (\
 		read -p "Sauce Labs Username: " name && \
 		read -p "Sauce Labs Access key: " key && \
 		echo "{\"username\": \"$$name\", \"accessKey\": \"$$key\"}" > user.json \
 		)
-
 
 # grunt-release can't be installed via package.json as some coffee dependencies prevent it from running atomically
 install-grunt-release:
