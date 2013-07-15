@@ -90,6 +90,16 @@ describe("Sauce Connect Launcher", function () {
         done();
       });
     });
+
+    it("should execute a provided close callback", function (done) {
+      sauceConnectLauncher(sauceCreds, function (err, sauceConnectProcess) {
+        if (err) { throw err; }
+        expect(sauceConnectProcess).to.be.ok();
+        sauceConnectProcess.close(function () {
+          done();
+        });
+      });
+    });
   }
 
 });
