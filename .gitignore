@@ -2,6 +2,8 @@
 .tags
 lib/*
 ^lib/sauce-connect-launcher.js
+lib-cov/
+test/coverage.html
 sauce_connect.log
 node_modules/
 npm-debug.log

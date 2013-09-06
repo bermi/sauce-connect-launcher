@@ -22,8 +22,9 @@ var sauceConnectLauncher = require('sauce-connect-launcher'),
 		verbose: false,
 		logfile: null, //optionally change sauce connect logfile location
 		tunnelIdentifier: null, // optionally identity the tunnel for concurrent tunnels
-		logger: console.log,
-		no_progress: false // optionally hide progress bar
+		fastFailRexegps: null, // an array or comma-separated list of regexes whose matches will not go through the tunnel
+		directDomains: null, // an array or comma-separated list of domains that will not go through the tunnel
+		logger: console.log
 	};
 
 sauceConnectLauncher(options, function (err, sauceConnectProcess) {
