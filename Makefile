@@ -8,6 +8,7 @@ help:
 test:
 	@make setup
 	@make clean
+	@make lint
 	@mocha --reporter spec $(MOCHAFLAGS)
 
 # Lints the code
