@@ -25,15 +25,16 @@
     "adm-zip": "~0.4.3"
   },
   "devDependencies": {
-    "mocha": "~1.7.0",
-    "expect.js": "~0.2.0",
+    "mocha": "~1.17.1",
+    "expect.js": "~0.3.1",
     "grunt": "~0.4.1",
     "grunt-cli": "~0.1.9",
-    "grunt-contrib-watch": "~0.4.4",
-    "grunt-contrib-jshint": "~0.6.0",
+    "grunt-contrib-watch": "~0.5.3",
+    "grunt-contrib-jshint": "~0.8.0",
     "grunt-simple-mocha": "~0.4.0",
     "grunt-notify": "~0.2.4",
-    "colors": "~0.6.0-1"
+    "colors": "~0.6.0-1",
+    "grunt-release": "~0.7.0"
   },
   "engines": {
     "node": ">= 0.8.x"
