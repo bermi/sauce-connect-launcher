@@ -74,6 +74,12 @@ or
 make test
 ```
 
+## Changelog
+
+### v0.3.0
+- Support Sauce Connect 4.0
+- Use `os.tmpdir()` for readyfile
+
 ## License
 
 (The MIT License)
