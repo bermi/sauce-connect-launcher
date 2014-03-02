@@ -21,10 +21,7 @@ dev: all
 	grunt watch
 
 clean:
-	rm -f lib/Sauce-Connect.jar \
-		lib/Sauce-Connect-latest.zip \
-		lib/NOTICE.txt lib/license.html \
-		lib/readyfile \
+	rm -rf sc/ \
 		sauce_connect.log* \
 		npm-debug.log
 

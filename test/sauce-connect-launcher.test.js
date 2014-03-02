@@ -1,8 +1,9 @@
-
-var sauceConnectLauncher = require("../"),
+var
+  _ = require("lodash"),
+  sauceConnectLauncher = require("../"),
   expect = require("expect.js"),
-  fs = require("fs"),
   path = require("path"),
+  rimraf = require("rimraf"),
   sauceCreds,
   verbose = process.env.VERBOSE_TESTS || false;
 
@@ -12,6 +13,7 @@ try {
   sauceCreds = process.env.SAUCE_ACCESS_KEY ? {} : require("../user.json");
   sauceCreds.verbose = verbose;
   sauceCreds.log = [];
+  sauceCreds.logfile = __dirname + "/../sauce_connect.log";
   sauceCreds.logger = function (message) {
     if (verbose) {
       console.log("[info] ", message);
@@ -25,17 +27,11 @@ try {
 
 describe("Sauce Connect Launcher", function () {
   var removeSauceConnect = function (done) {
-    try {
-      fs.unlinkSync(path.normalize(__dirname + "/../lib/Sauce-Connect.jar"));
-    } catch (e) { }
-    try {
-      fs.unlinkSync(path.normalize(__dirname + "/../lib/Sauce-Connect-latest.zip"));
-    } catch (e) { }
-    done();
+    rimraf(path.normalize(__dirname + "/../sc/"), done);
   };
 
   before(removeSauceConnect);
-  after(removeSauceConnect);
+  //after(removeSauceConnect);
 
   this.timeout(3600 * 10000);
 
@@ -54,25 +50,30 @@ describe("Sauce Connect Launcher", function () {
           console.log("[info] ", message);
         }
         log.push(message);
-      }
-    }, function (err, sauceConnectProcess) {
+      },
+      logfile: __dirname + "/../sauce_connect.log"
+    }, function (err) {
       if (err) {
         console.log(err.message);
       }
 
-      sauceConnectProcess.close();
-
       // Expected command sequence
-      expect(log).to.be.eql([
+      var expectedSequence = [
         "Missing Sauce Connect local proxy, downloading dependency",
         "This will only happen once.",
         "Downloading ",
-        "Unzipping Sauce-Connect-latest.zip",
-        "Removing Sauce-Connect-latest.zip",
+        "Unzipping " + sauceConnectLauncher.getArchiveName(),
+        "Removing " + sauceConnectLauncher.getArchiveName(),
         "Sauce Connect installed correctly",
         "Opening local tunnel using Sauce Connect",
+        "Starting sc with args: ",
+        "Creating tunnel with Sauce Labs",
         "Invalid Sauce Connect Credentials"
-      ]);
+      ];
+
+      _.each(log, function (message, i) {
+        expect(message).to.match(new RegExp("^" + (expectedSequence[i] || "\\*missing\\*")));
+      });
 
       expect(err).to.be.an(Error);
 
@@ -87,7 +88,9 @@ describe("Sauce Connect Launcher", function () {
         expect(sauceConnectProcess).to.be.ok();
         sauceConnectLauncher.kill();
         expect(sauceCreds.log).to.contain("Testing tunnel ready", "Closing Sauce Connect Tunnel");
-        done();
+        sauceConnectProcess.on("exit", function () {
+          done();
+        });
       });
     });
 

@@ -34,7 +34,8 @@
     "grunt-simple-mocha": "~0.4.0",
     "grunt-notify": "~0.2.4",
     "colors": "~0.6.0-1",
-    "grunt-release": "~0.7.0"
+    "grunt-release": "~0.7.0",
+    "rimraf": "~2.2.6"
   },
   "engines": {
     "node": ">= 0.8.x"
