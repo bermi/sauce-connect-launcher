@@ -63,6 +63,7 @@ describe("Sauce Connect Launcher", function () {
         "This will only happen once.",
         "Downloading ",
         "Unzipping " + sauceConnectLauncher.getArchiveName(),
+        "Setting execute permissions ",
         "Removing " + sauceConnectLauncher.getArchiveName(),
         "Sauce Connect installed correctly",
         "Opening local tunnel using Sauce Connect",
