@@ -3,7 +3,7 @@
 lib/*
 ^lib/sauce-connect-launcher.js
 lib-cov/
-sc
+sc/*
 test/coverage.html
 sauce_connect.log
 node_modules/
