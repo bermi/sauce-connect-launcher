@@ -80,6 +80,29 @@ make test
 - Support Sauce Connect 4.0
 - Use `os.tmpdir()` for readyfile
 
+### v0.3.1
+- Set execute permissions after downloading <#17>
+
+### v0.3.2
+- Properly execute permissions on Windows <#19>
+
+### v0.3.3
+- Support node 0.8.x <#20>
+
+### v0.4.0
+- Use Sauce Connect v4.1 with Heartbleed fixes <#22>
+
+### v0.4.1
+- Remove Mac binaries added by mistake
+
+### v0.4.2
+- Obfuscate credentials in logger output <#23>
+
+### v0.5.0
+- Use Sauce Connect 4.2 by default
+- Allow run-time overriding of Sauce Connect Version <#25>
+- Always set and check execute permissions <#27>
+
 ## License
 
 (The MIT License)
