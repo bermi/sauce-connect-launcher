@@ -1,6 +1,6 @@
 # sauce-connect-launcher
 
-[![Build Status](https://secure.travis-ci.org/bermi/sauce-connect-launcher.png)](http://travis-ci.org/bermi/sauce-connect-launcher)
+[![Build Status](https://api.travis-ci.org/bermi/sauce-connect-launcher.svg)](http://travis-ci.org/bermi/sauce-connect-launcher)  [![Dependency Status](https://david-dm.org/bermi/sauce-connect-launcher.svg)](https://david-dm.org/bermi/sauce-connect-launcher)
 
 A library to download and launch Sauce Connect.
 
@@ -13,32 +13,84 @@ npm install sauce-connect-launcher
 ## Usage
 
 
+### Simple Usage
+
+```javascript
+var sauceConnectLauncher = require('sauce-connect-launcher');
+
+sauceConnectLauncher({
+  username: 'bermi',
+  accessKey: '12345678-1234-1234-1234-1234567890ab'
+}, function (err, sauceConnectProcess) {
+  if (err) {
+    console.error(err.message);
+    return;
+  }
+  console.log("Sauce Connect ready");
+
+  sauceConnectProcess.close(function () {
+    console.log("Closed Sauce Connect process");
+  })
+});
+```
+
+### Advanced Usage
+
 ```javascript
 
 var sauceConnectLauncher = require('sauce-connect-launcher'),
-	options = {
-		username: 'bermi',
-		accessKey: '12345678-1234-1234-1234-1234567890ab',
-		verbose: false,
-		logfile: null, //optionally change sauce connect logfile location
-		tunnelIdentifier: null, // optionally identity the tunnel for concurrent tunnels
-		fastFailRexegps: null, // an array or comma-separated list of regexes whose matches will not go through the tunnel
-		directDomains: null, // an array or comma-separated list of domains that will not go through the tunnel
-		logger: console.log
-	};
+  options = {
+
+    // Sauce Labs username.  You can also pass this through the
+    // SAUCE_USERNAME environment variable
+    username: 'bermi',
+
+    // Sauce Labs access key.  You can also pass this through the
+    // SAUCE_ACCESS_KEY environment variable
+    accessKey: '12345678-1234-1234-1234-1234567890ab',
+
+    // Log output from the `sc` process to stdout?
+    verbose: false,
+
+    // Port on which Sauce Connect's Selenium relay will listen for
+    // requests. Default 4445. (optional)
+    port: null
+
+    // Proxy host and port that Sauce Connect should use to connect to
+    // the Sauce Labs cloud. e.g. "localhost:1234" (optional)
+    proxy: null
+
+    // Change sauce connect logfile location (optional)
+    logfile: null,
+
+    // Identity the tunnel for concurrent tunnels (optional)
+    tunnelIdentifier: null,
+
+    // an array or comma-separated list of regexes whose matches
+    // will not go through the tunnel. (optional)
+    fastFailRexegps: null,
+
+    // an array or comma-separated list of domains that will not go
+    // through the tunnel. (optional)
+    directDomains: null,
+
+    // A function to optionally write sauce-connect-launcher log messages.
+    // e.g. `console.log`.  (optional)
+    logger: function (message) {}
+  };
 
 sauceConnectLauncher(options, function (err, sauceConnectProcess) {
-	console.log("Started Sauce Connect Process");
-	sauceConnectProcess.close(function () {
-		console.log("Closed Sauce Connect process");
-	});
+  console.log("Started Sauce Connect Process");
+  sauceConnectProcess.close(function () {
+    console.log("Closed Sauce Connect process");
+  });
 });
 
 ```
 
 ### Credentials
 
-You can also pass the credentials as SAUCE_USERNAME and SAUCE_ACCESS_KEY environment variables.
+You can also pass the credentials as `SAUCE_USERNAME` and `SAUCE_ACCESS_KEY` environment variables. (reccommended)
 
 You can also create a user.json file in your current working directory with the username and key
 
@@ -46,6 +98,15 @@ user.json
 ```
 {"username": "bermi", "accessKey": "12345678-1234-1234-1234-1234567890ab"}
 ```
+
+### Sauce Connect Version
+
+You can override the default Sauce Connect version with the `SAUCE_CONNECT_VERSION` environment variable.
+
+```sh
+$ SAUCE_CONNECT_VERSION=4.2 node myTestApp.js
+```
+
 
 ## Development
 
@@ -76,32 +137,33 @@ make test
 
 ## Changelog
 
-### v0.3.0
-- Support Sauce Connect 4.0
-- Use `os.tmpdir()` for readyfile
+### v0.5.0
+- Use Sauce Connect v4.2 by default
+- Allow run-time overriding of Sauce Connect Version (#25)
+- Always set and check execute permissions (#27)
 
-### v0.3.1
-- Set execute permissions after downloading <#17>
-
-### v0.3.2
-- Properly execute permissions on Windows <#19>
-
-### v0.3.3
-- Support node 0.8.x <#20>
-
-### v0.4.0
-- Use Sauce Connect v4.1 with Heartbleed fixes <#22>
+### v0.4.2
+- Obfuscate credentials in logger output (#23)
 
 ### v0.4.1
 - Remove Mac binaries added by mistake
 
-### v0.4.2
-- Obfuscate credentials in logger output <#23>
+### v0.4.0
+- Use Sauce Connect v4.1 with Heartbleed fixes (#22)
 
-### v0.5.0
-- Use Sauce Connect 4.2 by default
-- Allow run-time overriding of Sauce Connect Version <#25>
-- Always set and check execute permissions <#27>
+### v0.3.3
+- Support node 0.8.x (#20)
+
+### v0.3.2
+- Properly execute permissions on Windows (#19)
+
+### v0.3.1
+- Set execute permissions after downloading (#17)
+
+### v0.3.0
+- Support Sauce Connect 4.0
+- Use `os.tmpdir()` for readyfile
+
 
 ## License
 
