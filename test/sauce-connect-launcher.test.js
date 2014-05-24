@@ -42,7 +42,7 @@ describe("Sauce Connect Launcher", function () {
       // We wont use real credentials, the point is to
       // know that we have the required jar to connect to
       // sauce
-      username: "bermi",
+      username: _.sample("abcdefghijklmnopqrstuvwxyzaeiou", 10).join(""),
       accessKey: "12345678-1234-1234-1234-1234567890ab",
       verbose: verbose,
       logger: function (message) {
