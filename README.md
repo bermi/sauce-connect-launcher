@@ -137,6 +137,9 @@ make test
 
 ## Changelog
 
+### v0.5.1
+- Set execute bit after download (#29)
+
 ### v0.5.0
 - Use Sauce Connect v4.2 by default
 - Allow run-time overriding of Sauce Connect Version (#25)
