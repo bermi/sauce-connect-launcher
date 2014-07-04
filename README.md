@@ -137,6 +137,9 @@ make test
 
 ## Changelog
 
+### v0.5.2
+- Use Sauce Connect v4.3 by default (#31)
+
 ### v0.5.1
 - Set execute bit after download (#29)
 
