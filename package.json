@@ -1,7 +1,7 @@
 {
   "name": "sauce-connect-launcher",
   "description": "A library to download and launch Sauce Connect.",
-  "version": "0.5.1",
+  "version": "0.5.2",
   "homepage": "https://github.com/bermi/sauce-connect-launcher",
   "author": "Bermi Ferrer <bermi@bermilabs.com>",
   "main": "lib/sauce-connect-launcher",
