@@ -146,6 +146,9 @@ make test
 
 ## Changelog
 
+### v0.6.0
+- Exposing more logging options (#32)
+
 ### v0.5.2
 - Use Sauce Connect v4.3 by default (#31)
 
