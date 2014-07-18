@@ -63,6 +63,15 @@ var sauceConnectLauncher = require('sauce-connect-launcher'),
     // Change sauce connect logfile location (optional)
     logfile: null,
 
+    // Period to log statistics about HTTP traffic in seconds (optional)
+    logStats: null,
+
+    // Maximum size before which the logfile is rotated (optional)
+    maxLogsize: null,
+
+    // Set to true to perform checks to detect possible misconfiguration or problems (optional)
+    doctor: null,
+
     // Identity the tunnel for concurrent tunnels (optional)
     tunnelIdentifier: null,
 
