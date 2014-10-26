@@ -52,6 +52,9 @@ var sauceConnectLauncher = require('sauce-connect-launcher'),
     // Log output from the `sc` process to stdout?
     verbose: false,
 
+    // Enable verbose debugging (optional)
+    verboseDebugging: false,
+
     // Port on which Sauce Connect's Selenium relay will listen for
     // requests. Default 4445. (optional)
     port: null
