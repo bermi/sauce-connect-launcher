@@ -38,24 +38,15 @@ describe("Sauce Connect Launcher", function () {
   it("should download Sauce Connect", function (done) {
     // We need to allow enough time for downloading Sauce Connect
     var log = [];
-    sauceConnectLauncher({
-      // We wont use real credentials, the point is to
-      // know that we have the required jar to connect to
-      // sauce
-      username: _.sample("abcdefghijklmnopqrstuvwxyzaeiou", 10).join(""),
-      accessKey: "12345678-1234-1234-1234-1234567890ab",
-      verbose: verbose,
+    sauceConnectLauncher.download({
       logger: function (message) {
         if (verbose) {
           console.log("[info] ", message);
         }
         log.push(message);
       },
-      logfile: __dirname + "/../sauce_connect.log"
     }, function (err) {
-      if (err) {
-        console.log(err.message);
-      }
+      expect(err).to.not.be.ok();
 
       // Expected command sequence
       var expectedSequence = [
@@ -65,17 +56,11 @@ describe("Sauce Connect Launcher", function () {
         "Unzipping " + sauceConnectLauncher.getArchiveName(),
         "Removing " + sauceConnectLauncher.getArchiveName(),
         "Sauce Connect downloaded correctly",
-        "Opening local tunnel using Sauce Connect",
-        "Starting sc with args: ",
-        "Creating tunnel with Sauce Labs",
-        "Invalid Sauce Connect Credentials"
       ];
 
       _.each(log, function (message, i) {
         expect(message).to.match(new RegExp("^" + (expectedSequence[i] || "\\*missing\\*")));
       });
-
-      expect(err).to.be.an(Error);
 
       done();
     });
