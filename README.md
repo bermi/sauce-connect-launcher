@@ -149,6 +149,10 @@ make test
 
 ## Changelog
 
+### v0.7.0
+- Downloading sc during "npm install" (#36)
+- Adding --verboseDebugging for passing the --verbose flag to sc (#33)
+
 ### v0.6.0
 - Exposing more logging options (#32)
 
