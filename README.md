@@ -88,7 +88,12 @@ var sauceConnectLauncher = require('sauce-connect-launcher'),
 
     // A function to optionally write sauce-connect-launcher log messages.
     // e.g. `console.log`.  (optional)
-    logger: function (message) {}
+    logger: function (message) {},
+
+    // an optional suffix to be appended to the `readyFile` name.
+    // useful when running multiple tunnels on the same machine,
+    // such as in a continuous integration environment. (optional)
+    readyFileId: null
   };
 
 sauceConnectLauncher(options, function (err, sauceConnectProcess) {
