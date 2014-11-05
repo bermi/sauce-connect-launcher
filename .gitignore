@@ -1,6 +1,7 @@
 .DS_Store
 .tags
 lib/*
+^lib/sc.js
 ^lib/sauce-connect-launcher.js
 lib-cov/
 sc/*

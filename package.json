@@ -21,10 +21,12 @@
     "test": "make test"
   },
   "dependencies": {
-    "lodash": "2.4.1",
-    "async": "~0.9.0",
     "adm-zip": "~0.4.3",
-    "rimraf": "~2.2.6"
+    "async": "~0.9.0",
+    "lodash": "2.4.1",
+    "mkdirp": "^0.5.0",
+    "rimraf": "~2.2.6",
+    "tar": "^1.0.2"
   },
   "devDependencies": {
     "colors": "~0.6.2",
