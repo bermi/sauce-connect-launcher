@@ -154,6 +154,12 @@ make test
 
 ## Changelog
 
+### v0.8.0
+- add readyFile suffix option (#39/#41)
+
+### v0.7.1
+- Changed install script to prepublish (#37/#38)
+
 ### v0.7.0
 - Downloading sc during "npm install" (#36)
 - Adding --verboseDebugging for passing the --verbose flag to sc (#33)
