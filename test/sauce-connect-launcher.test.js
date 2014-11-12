@@ -50,11 +50,9 @@ describe("Sauce Connect Launcher", function () {
 
       // Expected command sequence
       var expectedSequence = [
-        "Missing Sauce Connect local proxy, downloading dependency",
-        "This will only happen once.",
         "Downloading ",
-        "Unzipping " + sauceConnectLauncher.getArchiveName(),
-        "Removing " + sauceConnectLauncher.getArchiveName(),
+        "Unzipping .*" + sauceConnectLauncher.getArchiveName(),
+        "Removing .*" + sauceConnectLauncher.getArchiveName(),
         "Sauce Connect downloaded correctly",
       ];
 

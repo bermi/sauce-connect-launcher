@@ -1,6 +1,6 @@
-var sauceConnectLauncher = require('..');
+var sc = require('../lib/sc.js');
 
-sauceConnectLauncher.download({
+sc.download({
   logger: console.log.bind(console),
 }, function(error) {
   if (error) {
