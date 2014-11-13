@@ -154,8 +154,14 @@ make test
 
 ## Changelog
 
+### v0.8.2
+- Removing linux binaries published by mistake
+
+### v0.8.1
+- Changed prepublish script to postinstall(#38)
+
 ### v0.8.0
-- add readyFile suffix option (#39/#41)
+- Add readyFile suffix option (#39/#41)
 
 ### v0.7.1
 - Changed install script to prepublish (#37/#38)
