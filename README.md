@@ -1,6 +1,6 @@
 # sauce-connect-launcher
 
-[![Build Status](https://api.travis-ci.org/bermi/sauce-connect-launcher.svg)](http://travis-ci.org/bermi/sauce-connect-launcher)  [![Dependency Status](https://david-dm.org/bermi/sauce-connect-launcher.svg)](https://david-dm.org/bermi/sauce-connect-launcher)
+[![Build Status](https://api.travis-ci.org/bermi/sauce-connect-launcher.svg)](http://travis-ci.org/bermi/sauce-connect-launcher)  [![Dependency Status](https://david-dm.org/bermi/sauce-connect-launcher.svg)](https://david-dm.org/bermi/sauce-connect-launcher) [![](http://img.shields.io/npm/v/sauce-connect-launcher.svg) ![](http://img.shields.io/npm/dm/sauce-connect-launcher.svg)](https://www.npmjs.org/package/sauce-connect-launcher)
 
 A library to download and launch Sauce Connect.
 
