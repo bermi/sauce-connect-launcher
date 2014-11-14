@@ -154,6 +154,9 @@ make test
 
 ## Changelog
 
+### v0.9.0
+- Bumping default Sauce Connect version to 4.3.5
+
 ### v0.8.2
 - Removing linux binaries published by mistake
 
