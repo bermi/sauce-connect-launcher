@@ -154,6 +154,8 @@ make test
 
 ## Changelog
 
+### v0.9.2
+- Handling errors reported as JSON (#43)
 
 ### v0.9.1
 - Downloading on install only when installing globally or the
