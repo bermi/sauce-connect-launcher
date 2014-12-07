@@ -154,6 +154,13 @@ make test
 
 ## Changelog
 
+
+### v0.9.1
+- Downloading on install only when installing globally or the
+  `SAUCE_CONNECT_DOWNLOAD_ON_INSTALL=true` environment variable is set (#42)
+  Either way, a failure on `npm postinstall` will not halt the installation
+  as lazy installation can still be performed.
+
 ### v0.9.0
 - Bumping default Sauce Connect version to 4.3.5
 
