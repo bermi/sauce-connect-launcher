@@ -154,6 +154,10 @@ make test
 
 ## Changelog
 
+### v0.9.3
+- Disabling troublesome download on install unless the
+  `SAUCE_CONNECT_DOWNLOAD_ON_INSTALL=true` env flag is used
+
 ### v0.9.2
 - Handling errors reported as JSON (#43)
 
