@@ -156,6 +156,10 @@ make test
 
 ## Changelog
 
+
+### v0.10.1
+- Fixed file omitted by gitignore
+
 ### v0.10.0
 - Refactored options handling to allow for future Sauce Connect options
 
