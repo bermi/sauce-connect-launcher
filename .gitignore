@@ -1,7 +1,5 @@
 .DS_Store
 .tags
-lib/*
-^lib/sauce-connect-launcher.js
 lib-cov/
 sc/*
 test/coverage.html
