@@ -105,6 +105,8 @@ sauceConnectLauncher(options, function (err, sauceConnectProcess) {
 
 ```
 
+Additional Sauce Connect options not specified above can still be passed.  `additionalArg: "foo"` options will be converted to `--addtional-arg foo` args (camelCase to kebeb-case).  Arrays will be `join()`ed (like `directDomains`) and boolean options will be passed as flags. See [Sauce Connect's docs](https://docs.saucelabs.com/reference/sauce-connect/) for a full list of arguments.
+
 ### Credentials
 
 You can also pass the credentials as `SAUCE_USERNAME` and `SAUCE_ACCESS_KEY` environment variables. (reccommended)
