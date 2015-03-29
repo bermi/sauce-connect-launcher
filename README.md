@@ -156,6 +156,9 @@ make test
 
 ## Changelog
 
+### v0.10.3
+- Handle another error log output (#35)
+
 ### v0.10.2
 - Bumping default Sauce Connect version to 4.3.7 (#51)
 
