@@ -10,6 +10,12 @@ A library to download and launch Sauce Connect.
 npm install sauce-connect-launcher
 ```
 
+If you wish to also download Sauce Connect at this stage, rather than on first run, use the `SAUCE_CONNECT_DOWNLOAD_ON_INSTALL` environment variable.
+
+```sh
+SAUCE_CONNECT_DOWNLOAD_ON_INSTALL=true npm install
+```
+
 ## Usage
 
 
@@ -109,7 +115,7 @@ Additional Sauce Connect options not specified above can still be passed.  `addi
 
 ### Credentials
 
-You can also pass the credentials as `SAUCE_USERNAME` and `SAUCE_ACCESS_KEY` environment variables. (reccommended)
+You can pass the Sauce Labs credentials as `SAUCE_USERNAME` and `SAUCE_ACCESS_KEY` environment variables. (reccommended)
 
 You can also create a user.json file in your current working directory with the username and key
 
