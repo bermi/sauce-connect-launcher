@@ -156,6 +156,8 @@ make test
 
 ## Changelog
 
+### v0.10.2
+- Bumping default Sauce Connect version to 4.3.7 (#51)
 
 ### v0.10.1
 - Fixed file omitted by gitignore
