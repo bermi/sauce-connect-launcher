@@ -63,11 +63,11 @@ var sauceConnectLauncher = require('sauce-connect-launcher'),
 
     // Port on which Sauce Connect's Selenium relay will listen for
     // requests. Default 4445. (optional)
-    port: null
+    port: null,
 
     // Proxy host and port that Sauce Connect should use to connect to
     // the Sauce Labs cloud. e.g. "localhost:1234" (optional)
-    proxy: null
+    proxy: null,
 
     // Change sauce connect logfile location (optional)
     logfile: null,
