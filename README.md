@@ -10,6 +10,12 @@ A library to download and launch Sauce Connect.
 npm install sauce-connect-launcher
 ```
 
+If you wish to also download Sauce Connect at this stage, rather than on first run, use the `SAUCE_CONNECT_DOWNLOAD_ON_INSTALL` environment variable.
+
+```sh
+SAUCE_CONNECT_DOWNLOAD_ON_INSTALL=true npm install
+```
+
 ## Usage
 
 
@@ -57,11 +63,11 @@ var sauceConnectLauncher = require('sauce-connect-launcher'),
 
     // Port on which Sauce Connect's Selenium relay will listen for
     // requests. Default 4445. (optional)
-    port: null
+    port: null,
 
     // Proxy host and port that Sauce Connect should use to connect to
     // the Sauce Labs cloud. e.g. "localhost:1234" (optional)
-    proxy: null
+    proxy: null,
 
     // Change sauce connect logfile location (optional)
     logfile: null,
@@ -105,9 +111,11 @@ sauceConnectLauncher(options, function (err, sauceConnectProcess) {
 
 ```
 
+Additional Sauce Connect options not specified above can still be passed.  `additionalArg: "foo"` options will be converted to `--addtional-arg foo` args (camelCase to kebeb-case).  Arrays will be `join()`ed (like `directDomains`) and boolean options will be passed as flags. See [Sauce Connect's docs](https://docs.saucelabs.com/reference/sauce-connect/) for a full list of arguments.
+
 ### Credentials
 
-You can also pass the credentials as `SAUCE_USERNAME` and `SAUCE_ACCESS_KEY` environment variables. (reccommended)
+You can pass the Sauce Labs credentials as `SAUCE_USERNAME` and `SAUCE_ACCESS_KEY` environment variables. (reccommended)
 
 You can also create a user.json file in your current working directory with the username and key
 
@@ -153,6 +161,18 @@ make test
 ```
 
 ## Changelog
+
+### v0.10.3
+- Handle another error log output (#35)
+
+### v0.10.2
+- Bumping default Sauce Connect version to 4.3.7 (#51)
+
+### v0.10.1
+- Fixed file omitted by gitignore
+
+### v0.10.0
+- Refactored options handling to allow for future Sauce Connect options
 
 ### v0.9.3
 - Disabling troublesome download on install unless the
