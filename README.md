@@ -162,6 +162,12 @@ make test
 
 ## Changelog
 
+
+### v0.11.0
+
+- Updating dependencies
+- Catching connection errors (#54)
+
 ### v0.10.3
 - Handle another error log output (#35)
 
