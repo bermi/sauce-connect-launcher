@@ -162,6 +162,10 @@ make test
 
 ## Changelog
 
+### v0.12.0
+
+- Sauce Connect version 4.3.10
+- Updated dependencies
 
 ### v0.11.0
 
