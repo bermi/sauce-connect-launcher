@@ -162,6 +162,11 @@ make test
 
 ## Changelog
 
+### v0.13.0
+
+- Sauce Connect version 4.3.11
+- Bug-fix: Correctly catch api errors and log a message
+
 ### v0.12.0
 
 - Sauce Connect version 4.3.10
