@@ -24,7 +24,8 @@
     "lodash": "3.10.1",
     "async": "1.4.0",
     "adm-zip": "~0.4.3",
-    "rimraf": "2.4.3"
+    "rimraf": "2.4.3",
+    "https-proxy-agent": "1.0.0"
   },
   "devDependencies": {
     "colors": "~1.1.2",
