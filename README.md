@@ -162,7 +162,7 @@ make test
 
 ## Changelog
 
-### v0.15.0
+### v0.15.1
 
 - Add http/s proxy support for download. (#80, #83)
 
