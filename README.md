@@ -162,6 +162,15 @@ make test
 
 ## Changelog
 
+### v0.15.0
+
+- Add http/s proxy support for download. (#80, #83)
+
+### v0.14.0
+
+- Support older versions of tar with `xzf` flag
+- SauceConnect 4.3.16
+
 ### v0.13.0
 
 - Sauce Connect version 4.3.11
