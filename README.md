@@ -86,7 +86,7 @@ var sauceConnectLauncher = require('sauce-connect-launcher'),
 
     // an array or comma-separated list of regexes whose matches
     // will not go through the tunnel. (optional)
-    fastFailRexegps: null,
+    fastFailRegexps: null,
 
     // an array or comma-separated list of domains that will not go
     // through the tunnel. (optional)
