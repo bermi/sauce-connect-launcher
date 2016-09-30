@@ -61,6 +61,9 @@ var sauceConnectLauncher = require('sauce-connect-launcher'),
     // Enable verbose debugging (optional)
     verboseDebugging: false,
 
+    // Together with verbose debugging will output HTTP headers as well (optional)
+    vv: false,
+
     // Port on which Sauce Connect's Selenium relay will listen for
     // requests. Default 4445. (optional)
     port: null,
@@ -111,7 +114,7 @@ sauceConnectLauncher(options, function (err, sauceConnectProcess) {
 
 ```
 
-Additional Sauce Connect options not specified above can still be passed.  `additionalArg: "foo"` options will be converted to `--addtional-arg foo` args (camelCase to kebeb-case).  Arrays will be `join()`ed (like `directDomains`) and boolean options will be passed as flags. See [Sauce Connect's docs](https://docs.saucelabs.com/reference/sauce-connect/) for a full list of arguments.
+Additional Sauce Connect options not specified above can still be passed.  `additionalArg: "foo"` options will be converted to `--addtional-arg foo` args (camelCase to kebab-case). Additional option starting with dash `"-additionalArg": "foo"` will be passed as it is `-additionalArg foo`. Arrays will be `join()`ed (like `directDomains`) and boolean options will be passed as flags.  See [Sauce Connect's docs](https://docs.saucelabs.com/reference/sauce-connect/) for a full list of arguments.
 
 ### Credentials
 
