@@ -43,6 +43,6 @@
     "node": ">= 0.10.x"
   },
   "sauceConnectLauncher": {
-    "scVersion": "4.4.0"
+    "scVersion": "4.4.1"
   }
 }
