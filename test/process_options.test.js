@@ -68,4 +68,8 @@ describe("processOptions", function () {
     })).to.eql([]);
   });
 
+  it("should properly parse the -vv option", function () {
+    expect(processOptions({vv: true})).to.eql(["-vv"]);
+  });
+
 });
