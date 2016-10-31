@@ -68,4 +68,9 @@ describe("processOptions", function () {
     })).to.eql([]);
   });
 
+  it("should handle 'vv' flag", function() {
+    var result = processOptions({vv: true});
+    expect(result).to.eql(["-vv"]);
+  });
+
 });
