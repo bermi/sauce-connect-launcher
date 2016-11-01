@@ -17,7 +17,7 @@ install:
 
 # Post-install test scripts.
 test_script:
-  - npm test
+  - appveyor-retry npm test
 
 # Don't actually build.
 build: off
