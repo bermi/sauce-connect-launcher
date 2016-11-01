@@ -128,7 +128,7 @@ describe("Sauce Connect Launcher", function () {
                 expect(body.status).to.eql("terminated");
                 done();
               });
-            }, 1000);
+            }, 3000);
           });
         });
       });

@@ -109,6 +109,10 @@ var sauceConnectLauncher = require('sauce-connect-launcher'),
 
     // time to wait between connection retries in ms. (optional)
     connectRetryTimeout: 5000
+
+    // path to a sauce connect executable (optional)
+    // by default the latest sauce connect version is downloaded
+    exe: null
   };
 
 sauceConnectLauncher(options, function (err, sauceConnectProcess) {
