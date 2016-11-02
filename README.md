@@ -102,7 +102,13 @@ var sauceConnectLauncher = require('sauce-connect-launcher'),
     // an optional suffix to be appended to the `readyFile` name.
     // useful when running multiple tunnels on the same machine,
     // such as in a continuous integration environment. (optional)
-    readyFileId: null
+    readyFileId: null,
+
+    // retry to establish a tunnel multiple times. (optional)
+    connectRetries: 0
+
+    // time to wait between connection retries in ms. (optional)
+    connectRetryTimeout: 5000
   };
 
 sauceConnectLauncher(options, function (err, sauceConnectProcess) {

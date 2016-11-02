@@ -64,7 +64,9 @@ describe("processOptions", function () {
     expect(processOptions({
       readyFileId: "1",
       verbose: true,
-      logger: function () {}
+      logger: function () {},
+      connectRetries: 1,
+      connectRetryTimeout: 5000
     })).to.eql([]);
   });
 
