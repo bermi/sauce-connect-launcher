@@ -175,6 +175,17 @@ make test
 
 ## Changelog
 
+### v1.0.0
+
+- Remove support for Node 0.10 and 0.12. (#103)
+- Support for using a custom executable (#99)
+- Hide API key from logs (#97)
+- Configurable connection retries (#101)
+- Various fixes for the Windows (#68, #95, #98)
+- Unwatch ready file on close (#67)
+- Auto-fetch the latest sc version (#96)
+- Support vv option (#93)
+
 ### v0.15.1
 
 - Add http/s proxy support for download. (#80, #83)

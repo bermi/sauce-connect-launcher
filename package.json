@@ -1,7 +1,7 @@
 {
   "name": "sauce-connect-launcher",
   "description": "A library to download and launch Sauce Connect.",
-  "version": "0.17.0",
+  "version": "1.0.0",
   "homepage": "https://github.com/bermi/sauce-connect-launcher",
   "author": "Bermi Ferrer <bermi@bermilabs.com>",
   "main": "lib/sauce-connect-launcher",
@@ -19,7 +19,8 @@
   },
   "scripts": {
     "postinstall": "node scripts/install.js || nodejs scripts/install.js",
-    "test": "make test"
+    "test": "make test",
+    "version": "git add README.md"
   },
   "dependencies": {
     "adm-zip": "~0.4.3",
