@@ -2,10 +2,9 @@
 language: node_js
 sudo: false
 node_js:
-- "0.10"
-- "0.12"
-- 4
-- 6
+- '4'
+- '6'
+- '7'
 env:
   global:
   - SAUCE_USERNAME=sc-launcher-ci
