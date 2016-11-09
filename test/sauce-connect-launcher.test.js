@@ -21,6 +21,7 @@ try {
     }
     sauceCreds.log.push(message);
   };
+  sauceCreds.connectRetries = 3;
 } catch (e) {
   require("colors");
   console.log("Please run make setup-sauce to set up real Sauce Labs Credentials".red);
