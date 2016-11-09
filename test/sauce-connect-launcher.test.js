@@ -86,6 +86,17 @@ describe("Sauce Connect Launcher", function () {
     });
   });
 
+  it("fails with an invalid executable", function (done) {
+    var options = _.clone(sauceCreds);
+    options.exe = "not-found";
+
+    sauceConnectLauncher(options, function (err) {
+      expect(err).to.be.ok();
+      expect(err.message).to.contain("ENOENT");
+      done();
+    });
+  });
+
   if (sauceCreds) {
     it("should work with real credentials", function (done) {
       sauceConnectLauncher(sauceCreds, function (err, sauceConnectProcess) {
