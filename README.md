@@ -113,6 +113,16 @@ var sauceConnectLauncher = require('sauce-connect-launcher'),
     // path to a sauce connect executable (optional)
     // by default the latest sauce connect version is downloaded
     exe: null
+
+    // keep sc running after the node process exited, this means you need to close
+    // the process manually once you are done using the pidfile
+    // Attention: This only works with sc versions <= 4.3.16 and only on macOS and
+    // linux at the moment
+    detached: null
+
+    // specify a connect version instead of fetching the latest version, this currently
+    // does not support checksum verification
+    connectVersion: 'latest'
   };
 
 sauceConnectLauncher(options, function (err, sauceConnectProcess) {

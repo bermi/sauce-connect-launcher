@@ -6,7 +6,9 @@ var
   rimraf = require("rimraf"),
   sauceCreds,
   verbose = process.env.VERBOSE_TESTS || false,
-  https = require("https");
+  https = require("https"),
+  childProcess = require("child_process"),
+  fs = require("fs");
 
 try {
   // When environment variables for SAUCE are found, we don't need
@@ -55,6 +57,27 @@ describe("Sauce Connect Launcher", function () {
 
   this.timeout(3600 * 10000);
 
+  it("fails with an invalid executable", function (done) {
+    var options = _.clone(sauceCreds);
+    options.exe = "not-found";
+
+    sauceConnectLauncher(options, function (err) {
+      expect(err).to.be.ok();
+      expect(err.message).to.contain("ENOENT");
+      done();
+    });
+  });
+
+  it("does not trigger a download when providing a custom executable", function (done) {
+    var options = _.clone(sauceCreds);
+    options.exe = "not-found";
+
+    sauceConnectLauncher(options, function () {
+      expect(fs.existsSync(path.join(__dirname, "../sc/versions.json"))).not.to.be.ok();
+      done();
+    });
+  });
+
   it("should download Sauce Connect", function (done) {
     // We need to allow enough time for downloading Sauce Connect
     var log = [];
@@ -73,8 +96,9 @@ describe("Sauce Connect Launcher", function () {
         "Missing Sauce Connect local proxy, downloading dependency",
         "This will only happen once.",
         "Downloading ",
-        "Unzipping " + sauceConnectLauncher.getArchiveName(),
-        "Removing " + sauceConnectLauncher.getArchiveName(),
+        "Archive checksum verified.",
+        "Unzipping ",
+        "Removing ",
         "Sauce Connect downloaded correctly",
       ];
 
@@ -82,17 +106,6 @@ describe("Sauce Connect Launcher", function () {
         expect(message).to.match(new RegExp("^" + (expectedSequence[i] || "\\*missing\\*")));
       });
 
-      done();
-    });
-  });
-
-  it("fails with an invalid executable", function (done) {
-    var options = _.clone(sauceCreds);
-    options.exe = "not-found";
-
-    sauceConnectLauncher(options, function (err) {
-      expect(err).to.be.ok();
-      expect(err.message).to.contain("ENOENT");
       done();
     });
   });
@@ -139,8 +152,65 @@ describe("Sauce Connect Launcher", function () {
                 expect(body.status).to.eql("terminated");
                 done();
               });
-            }, 3000);
+            }, 5000);
           });
+        });
+      });
+    });
+
+    it("allows to spawn sc detached", function (done) {
+      if (process.platform === "win32") { // detached mode not supported on windows yet
+        return this.skip();
+      }
+
+      var pidfile = path.join(__dirname, "../sc_client.pid");
+      var options = _.clone(sauceCreds);
+      options.detached = true;
+      options.pidfile = pidfile;
+      // FIXME: Versions > 4.3.16 don't work in detached mode.
+      options.connectVersion = "4.3.16";
+      delete options.logger;
+
+      var args = [ path.join(__dirname, "./fixture/spawn-sc.js"), JSON.stringify(options) ];
+      var sc = childProcess.spawn("node", args, { stdio: "inherit" });
+      sc.on("error", function (err) {
+        expect(err).to.not.be.ok();
+      });
+
+      sc.on("exit", function (code) {
+        expect(code).to.be(0);
+
+        fs.readFile(pidfile, function (err, content) {
+          expect(err).to.not.be.ok();
+
+          var pid = parseInt(content, 10);
+
+          // Check, whether sc is still running
+          expect(function () {
+            process.kill(pid, 0);
+          }).to.not.throwException();
+
+          // Gracefully terminate it
+          process.kill(pid, "SIGTERM");
+
+          // Poll until the process is gone and verify that it has cleaned up
+          var probeInterval = setInterval(function () {
+            try {
+              process.kill(pid, 0);
+            } catch (err) {
+              clearTimeout(probeInterval);
+
+              expect(err).to.be.ok();
+              expect(err.code).to.eql("ESRCH");
+
+              fs.readFile(pidfile, function (err) {
+                expect(err).to.be.ok();
+                expect(err.code).to.eql("ENOENT");
+
+                done();
+              });
+            }
+          }, 1000);
         });
       });
     });
