@@ -168,8 +168,15 @@ describe("Sauce Connect Launcher", function () {
 
           var pid = parseInt(content, 10);
 
+          // Check, whether sc is still running
+          expect(function () {
+            process.kill(pid, 0);
+          }).to.not.throwException();
+
+          // Gracefully terminate it
           process.kill(pid, "SIGTERM");
 
+          // Poll until the process is gone and verify that it has cleaned up
           var probeInterval = setInterval(function () {
             try {
               process.kill(pid, 0);
