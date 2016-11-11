@@ -6,7 +6,9 @@ var
   rimraf = require("rimraf"),
   sauceCreds,
   verbose = process.env.VERBOSE_TESTS || false,
-  https = require("https");
+  https = require("https"),
+  childProcess = require("child_process"),
+  fs = require("fs");
 
 try {
   // When environment variables for SAUCE are found, we don't need
@@ -141,6 +143,50 @@ describe("Sauce Connect Launcher", function () {
               });
             }, 3000);
           });
+        });
+      });
+    });
+
+    it.only("allows to spawn sc detached", function (done) {
+      var pidfile = path.join(__dirname, "../sc_client.pid");
+      var options = _.clone(sauceCreds);
+      options.detached = true;
+      options.pidfile = pidfile;
+      delete options.logger;
+
+      var args = [ path.join(__dirname, "./fixture/spawn-sc.js"), JSON.stringify(options) ];
+      var sc = childProcess.spawn("node", args, { stdio: "inherit" });
+      sc.on("error", function (err) {
+        expect(err).to.not.be.ok();
+      });
+
+      sc.on("exit", function (code) {
+        expect(code).to.be(0);
+
+        fs.readFile(pidfile, function (err, content) {
+          expect(err).to.not.be.ok();
+
+          var pid = parseInt(content, 10);
+
+          process.kill(pid, "SIGTERM");
+
+          var probeInterval = setInterval(function () {
+            try {
+              process.kill(pid, 0);
+            } catch (err) {
+              clearTimeout(probeInterval);
+
+              expect(err).to.be.ok();
+              expect(err.code).to.eql("ESRCH");
+
+              fs.readFile(pidfile, function (err) {
+                expect(err).to.be.ok();
+                expect(err.code).to.eql("ENOENT");
+
+                done();
+              });
+            }
+          }, 1000);
         });
       });
     });
