@@ -185,6 +185,10 @@ make test
 
 ## Changelog
 
+### v1.1.0
+
+- Detached mode and configurable version as open. (#105)
+
 ### v1.0.0
 
 - Remove support for Node 0.10 and 0.12. (#103)
