@@ -185,6 +185,10 @@ make test
 
 ## Changelog
 
+### v1.1.1
+
+- Ensure sc dir is created before downloading the archive. (#107)
+
 ### v1.1.0
 
 - Detached mode and configurable version as open. (#105)
