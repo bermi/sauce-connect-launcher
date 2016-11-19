@@ -66,7 +66,9 @@ describe("processOptions", function () {
       verbose: true,
       logger: function () {},
       connectRetries: 1,
-      connectRetryTimeout: 5000
+      connectRetryTimeout: 5000,
+      detached: true,
+      connectVersion: "1.2.3"
     })).to.eql([]);
   });
 

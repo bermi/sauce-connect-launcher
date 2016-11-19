@@ -7,7 +7,7 @@ describe("tryRun", function () {
   describe("without configured retry", function () {
     it("calls the provided function once", function (done) {
       var innerCalls = 0;
-      tryRun(0, {}, function (options, callback) {
+      tryRun(0, {}, function (callback) {
         innerCalls += 1;
         callback(innerErr);
       }, function (err) {
@@ -26,7 +26,7 @@ describe("tryRun", function () {
 
     it("calls the provided function once when no error is returned", function (done) {
       var innerCalls = 0;
-      tryRun(0, retryOptions, function (options, callback) {
+      tryRun(0, retryOptions, function (callback) {
         innerCalls += 1;
         callback(null);
       }, function (err) {
@@ -38,7 +38,7 @@ describe("tryRun", function () {
 
     it("retries up-to connectRetries when the function returns an error", function (done) {
       var innerCalls = 0;
-      tryRun(0, retryOptions, function (options, callback) {
+      tryRun(0, retryOptions, function (callback) {
         innerCalls += 1;
         callback(innerErr);
       }, function (err) {
@@ -51,7 +51,7 @@ describe("tryRun", function () {
     it("waits connectRetryTimeout between retries", function (done) {
       var innerCalls = 0;
       var start = Date.now();
-      tryRun(0, retryOptions, function (options, callback) {
+      tryRun(0, retryOptions, function (callback) {
         innerCalls += 1;
         callback(innerErr);
       }, function () {
