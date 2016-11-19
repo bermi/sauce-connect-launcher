@@ -52,8 +52,7 @@ describe("Sauce Connect Launcher", function () {
     rimraf(path.normalize(__dirname + "/../sc/"), done);
   };
 
-  before(removeSauceConnect);
-  //after(removeSauceConnect);
+  beforeEach(removeSauceConnect);
 
   this.timeout(3600 * 10000);
 
