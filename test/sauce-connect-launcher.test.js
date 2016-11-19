@@ -54,6 +54,10 @@ describe("Sauce Connect Launcher", function () {
 
   beforeEach(removeSauceConnect);
 
+  afterEach(function (done) {
+    sauceConnectLauncher.kill(done);
+  });
+
   this.timeout(3600 * 10000);
 
   it("fails with an invalid executable", function (done) {
@@ -112,7 +116,7 @@ describe("Sauce Connect Launcher", function () {
   if (sauceCreds) {
     it("should work with real credentials", function (done) {
       sauceConnectLauncher(sauceCreds, function (err, sauceConnectProcess) {
-        if (err) { throw err; }
+        expect(err).to.not.be.ok();
         expect(sauceConnectProcess).to.be.ok();
         sauceConnectLauncher.kill();
         expect(sauceCreds.log).to.contain("Testing tunnel ready", "Closing Sauce Connect Tunnel");
@@ -124,7 +128,7 @@ describe("Sauce Connect Launcher", function () {
 
     it("should execute a provided close callback", function (done) {
       sauceConnectLauncher(sauceCreds, function (err, sauceConnectProcess) {
-        if (err) { throw err; }
+        expect(err).to.not.be.ok();
         expect(sauceConnectProcess).to.be.ok();
         sauceConnectProcess.close(function () {
           done();
@@ -134,7 +138,7 @@ describe("Sauce Connect Launcher", function () {
 
     it("closes the open tunnel", function (done) {
       sauceConnectLauncher(sauceCreds, function (err, sauceConnectProcess) {
-        if (err) { throw err; }
+        expect(err).to.not.be.ok();
         expect(sauceConnectProcess).to.be.ok();
         expect(sauceConnectProcess.tunnelId).to.be.ok();
 
