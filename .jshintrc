@@ -23,10 +23,5 @@
   "onevar": true,
   "white": true,
   "strict": false,
-  "globals": {
-    "describe": true,
-    "after": true,
-    "before": true,
-    "it": true
-  }
+  "mocha": true
 }
