@@ -191,6 +191,11 @@ make test
 
 ## Changelog
 
+### v1.2.0
+
+- Improved download error handling and configurable download retries (#114)
+- Catch errors starting with `ERROR:` from sc output (#108)
+
 ### v1.1.1
 
 - Ensure sc dir is created before downloading the archive. (#107)
