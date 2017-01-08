@@ -11,6 +11,7 @@ describe("tryRun", function () {
         innerCalls += 1;
         callback(innerErr);
       }, function (err) {
+        expect(innerCalls).to.equal(1);
         expect(err).to.equal(innerErr);
         done();
       });
@@ -49,10 +50,8 @@ describe("tryRun", function () {
     });
 
     it("waits connectRetryTimeout between retries", function (done) {
-      var innerCalls = 0;
       var start = Date.now();
       tryRun(0, retryOptions, function (callback) {
-        innerCalls += 1;
         callback(innerErr);
       }, function () {
         var end = Date.now();
