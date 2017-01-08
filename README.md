@@ -108,7 +108,13 @@ var sauceConnectLauncher = require('sauce-connect-launcher'),
     connectRetries: 0
 
     // time to wait between connection retries in ms. (optional)
-    connectRetryTimeout: 5000
+    connectRetryTimeout: 2000
+
+    // retry to download the sauce connect archive multiple times. (optional)
+    downloadRetries: 0
+
+    // time to wait between download retries in ms. (optional)
+    downloadRetryTimeout: 1000
 
     // path to a sauce connect executable (optional)
     // by default the latest sauce connect version is downloaded

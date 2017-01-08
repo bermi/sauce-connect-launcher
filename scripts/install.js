@@ -1,3 +1,5 @@
+"use strict";
+
 // Only download on install when requested.
 if (!process.env.SAUCE_CONNECT_DOWNLOAD_ON_INSTALL) {
   return;

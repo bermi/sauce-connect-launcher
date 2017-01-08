@@ -1,3 +1,5 @@
+"use strict";
+
 var processOptions = require("../lib/process_options.js");
 var expect = require("expect.js");
 
@@ -67,6 +69,8 @@ describe("processOptions", function () {
       logger: function () {},
       connectRetries: 1,
       connectRetryTimeout: 5000,
+      downloadRetries: 1,
+      downloadRetryTimeout: 1000,
       detached: true,
       connectVersion: "1.2.3"
     })).to.eql([]);

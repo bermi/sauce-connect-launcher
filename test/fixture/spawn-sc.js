@@ -1,3 +1,5 @@
+"use strict";
+
 var sauceConnectLauncher = require("../../index");
 var options = JSON.parse(process.argv[2]);
 
