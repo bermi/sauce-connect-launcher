@@ -12,8 +12,8 @@ describe("processOptions", function () {
   });
 
   after(function () {
-     process.env.SAUCE_USERNAME = prevUser;
-     process.env.SAUCE_ACCESS_KEY = prevKey;
+    process.env.SAUCE_USERNAME = prevUser;
+    process.env.SAUCE_ACCESS_KEY = prevKey;
   });
 
   it("should process user and password", function () {

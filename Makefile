@@ -12,7 +12,7 @@ test: setup clean lint
 
 # Lints the code
 lint:
-	@grunt jshint
+	@grunt eslint
 
 all: setup
 	grunt

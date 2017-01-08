@@ -11,18 +11,15 @@ module.exports = function (grunt) {
       },
       all: ["test/**/*.js"]
     },
-    jshint: {
-      options: {
-        jshintrc: "./.jshintrc"
-      },
-      all: [
+    eslint: {
+      target: [
         "Gruntfile.js", "index.js", "lib/**/*.js",
         "scripts/*.js", "test/**/*.js"
       ]
     },
     watch: {
       all: {
-        files: "<%= jshint.all %>",
+        files: "<%= eslint.target %>",
         tasks: "default"
       }
     },
@@ -46,7 +43,7 @@ module.exports = function (grunt) {
   });
 
   grunt.loadNpmTasks("grunt-simple-mocha");
-  grunt.loadNpmTasks("grunt-contrib-jshint");
+  grunt.loadNpmTasks("grunt-eslint");
   grunt.loadNpmTasks("grunt-contrib-watch");
   grunt.loadNpmTasks("grunt-notify");
   // Currently grunt-release can't be included on package.json as it
@@ -58,6 +55,6 @@ module.exports = function (grunt) {
   //enable our hooks
   grunt.task.run("notify_hooks");
 
-  grunt.registerTask("default", ["jshint", "simplemocha", "notify:watch"]);
+  grunt.registerTask("default", ["eslint", "simplemocha", "notify:watch"]);
 
 };
