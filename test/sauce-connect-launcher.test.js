@@ -24,6 +24,7 @@ try {
     sauceCreds.log.push(message);
   };
   sauceCreds.connectRetries = 3;
+  sauceCreds.downloadRetries = 2;
 } catch (e) {
   require("colors");
   console.log("Please run make setup-sauce to set up real Sauce Labs Credentials".red);
@@ -63,6 +64,7 @@ describe("Sauce Connect Launcher", function () {
   it("fails with an invalid executable", function (done) {
     var options = _.clone(sauceCreds);
     options.exe = "not-found";
+    options.connectRetries = 0;
 
     sauceConnectLauncher(options, function (err) {
       expect(err).to.be.ok();
@@ -74,6 +76,7 @@ describe("Sauce Connect Launcher", function () {
   it("does not trigger a download when providing a custom executable", function (done) {
     var options = _.clone(sauceCreds);
     options.exe = "not-found";
+    options.connectRetries = 0;
 
     sauceConnectLauncher(options, function () {
       expect(fs.existsSync(path.join(__dirname, "../sc/versions.json"))).not.to.be.ok();
@@ -84,14 +87,15 @@ describe("Sauce Connect Launcher", function () {
   it("should download Sauce Connect", function (done) {
     // We need to allow enough time for downloading Sauce Connect
     var log = [];
-    sauceConnectLauncher.download({
-      logger: function (message) {
-        if (verbose) {
-          console.log("[info] ", message);
-        }
-        log.push(message);
-      },
-    }, function (err) {
+    var options = _.clone(sauceCreds);
+    options.logger = function (message) {
+      if (verbose) {
+        console.log("[info] ", message);
+      }
+      log.push(message);
+    };
+
+    sauceConnectLauncher.download(options, function (err) {
       expect(err).to.not.be.ok();
 
       // Expected command sequence
@@ -110,6 +114,75 @@ describe("Sauce Connect Launcher", function () {
       });
 
       done();
+    });
+  });
+
+  it("handles errors when Sauce Connect download fails", function (done) {
+    var log = [];
+    var options = _.clone(sauceCreds);
+    options.logger = function (message) {
+      if (verbose) {
+        console.log("[info] ", message);
+      }
+      log.push(message);
+    };
+    options.connectVersion = "9.9.9";
+    options.downloadRetries = 1;
+
+    sauceConnectLauncher.download(options, function (err) {
+      expect(err).to.be.ok();
+      expect(err.message).to.contain("Download failed with status code");
+
+      // Expected command sequence
+      var expectedSequence = [
+        "Missing Sauce Connect local proxy, downloading dependency",
+        "This will only happen once.",
+        "Invalid response status: 404",
+        "Missing Sauce Connect local proxy, downloading dependency",
+        "This will only happen once."
+      ];
+
+      _.each(log, function (message, i) {
+        expect(message).to.match(new RegExp("^" + (expectedSequence[i] || "\\*missing\\*")));
+      });
+
+      done();
+    });
+  });
+
+  describe("handles misconfigured proxies and other request failures", function () {
+    let options, http_proxy_original;
+
+    beforeEach(function () {
+      options = _.clone(sauceCreds);
+      options.downloadRetries = 0;
+
+      http_proxy_original = process.env.http_proxy;
+      process.env.http_proxy = "http://127.0.0.1:12345/";
+    })
+
+    afterEach(function () {
+      process.env.http_proxy = http_proxy_original;
+    })
+
+    it("when fetching versions.json", function (done) {
+      sauceConnectLauncher.download(options, function (err) {
+        expect(err).to.be.ok();
+        expect(err.message).to.contain("ECONNREFUSED");
+
+        done();
+      });
+    });
+
+    it("with fixed version when fetching archive", function (done) {
+      options.connectVersion = "9.9.9";
+
+      sauceConnectLauncher.download(options, function (err) {
+        expect(err).to.be.ok();
+        expect(err.message).to.contain("ECONNREFUSED");
+
+        done();
+      });
     });
   });
 

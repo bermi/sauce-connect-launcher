@@ -19,10 +19,9 @@ describe("tryRun", function () {
   });
 
   describe("with configured retry", function () {
-    var retryTimeout = 10;
     var retryOptions = {
-      connectRetries: 2,
-      connectRetryTimeout: retryTimeout
+      retries: 2,
+      timeout: 10
     };
 
     it("calls the provided function once when no error is returned", function (done) {
@@ -49,7 +48,7 @@ describe("tryRun", function () {
       });
     });
 
-    it("waits connectRetryTimeout between retries", function (done) {
+    it("waits timeout between retries", function (done) {
       var start = Date.now();
       tryRun(0, retryOptions, function (callback) {
         callback(innerErr);
