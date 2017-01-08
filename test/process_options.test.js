@@ -1,3 +1,5 @@
+"use strict";
+
 var processOptions = require("../lib/process_options.js");
 var expect = require("expect.js");
 

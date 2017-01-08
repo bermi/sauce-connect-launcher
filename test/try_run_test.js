@@ -1,3 +1,5 @@
+"use strict";
+
 var tryRun = require("../lib/try_run");
 var expect = require("expect.js");
 
