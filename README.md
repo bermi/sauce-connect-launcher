@@ -122,8 +122,7 @@ var sauceConnectLauncher = require('sauce-connect-launcher'),
 
     // keep sc running after the node process exited, this means you need to close
     // the process manually once you are done using the pidfile
-    // Attention: This only works with sc versions <= 4.3.16 and only on macOS and
-    // linux at the moment
+    // Attention: This works only on macOS and linux at the moment
     detached: null
 
     // specify a connect version instead of fetching the latest version, this currently
