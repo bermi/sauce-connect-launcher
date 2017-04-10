@@ -191,6 +191,11 @@ make test
 
 ## Changelog
 
+### v1.2.1
+
+- Fix getting tunnel id for Sauce Connect 4.4 (#123)
+- Don't include your .envrc in the release (#119)
+
 ### v1.2.0
 
 - Improved download error handling and configurable download retries (#114)
