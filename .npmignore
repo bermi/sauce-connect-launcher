@@ -2,6 +2,7 @@
 .gitignore
 .npmignore
 .tags
+.envrc
 lib/Sauce-Connect.jar
 lib/Sauce-Connect-latest.zip
 sauce_connect.log
