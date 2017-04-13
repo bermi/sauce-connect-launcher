@@ -8,9 +8,9 @@ var
   rimraf = require("rimraf"),
   sauceCreds,
   verbose = process.env.VERBOSE_TESTS || false,
-  https = require("https"),
   childProcess = require("child_process"),
-  fs = require("fs");
+  fs = require("fs"),
+  utils = require("./utils");
 
 try {
   // When environment variables for SAUCE are found, we don't need
@@ -30,24 +30,6 @@ try {
 } catch (e) {
   require("colors");
   console.log("Please run make setup-sauce to set up real Sauce Labs Credentials".red);
-}
-
-function getTunnel(tunnelId, cb) {
-  https.request({
-    method: "GET",
-    host: "saucelabs.com",
-    port: 443,
-    auth: process.env.SAUCE_USERNAME + ":" + process.env.SAUCE_ACCESS_KEY,
-    path: "/rest/v1/" + process.env.SAUCE_USERNAME + "/tunnels/" + tunnelId
-  }).on("response", function (res) {
-    var body = "";
-    res.on("data", function (chunk) {
-      body += chunk;
-    });
-    res.on("end", function () {
-      cb(null, res, JSON.parse(body));
-    });
-  }).on("error", cb).end();
 }
 
 describe("Sauce Connect Launcher", function () {
@@ -211,20 +193,36 @@ describe("Sauce Connect Launcher", function () {
       });
     });
 
+    it("extracts the tunnelId from sc output", function (done) {
+      sauceConnectLauncher(sauceCreds, function (err, sauceConnectProcess) {
+        expect(err).to.not.be.ok();
+        expect(sauceConnectProcess).to.be.ok();
+        expect(sauceConnectProcess.tunnelId).to.be.ok();
+
+        utils.getTunnels(function (err, res, body) {
+          expect(err).to.not.be.ok();
+          expect(res.statusCode).to.be(200);
+          expect(body).to.contain(sauceConnectProcess.tunnelId);
+
+          sauceConnectProcess.close(done);
+        });
+      });
+    });
+
     it("closes the open tunnel", function (done) {
       sauceConnectLauncher(sauceCreds, function (err, sauceConnectProcess) {
         expect(err).to.not.be.ok();
         expect(sauceConnectProcess).to.be.ok();
         expect(sauceConnectProcess.tunnelId).to.be.ok();
 
-        getTunnel(sauceConnectProcess.tunnelId, function (err, res, body) {
+        utils.getTunnel(sauceConnectProcess.tunnelId, function (err, res, body) {
           expect(err).to.not.be.ok();
           expect(res.statusCode).to.be(200);
           expect(body.status).to.eql("running");
 
           sauceConnectProcess.close(function () {
             setTimeout(function () { // Wait for tunnel to be terminated
-              getTunnel(sauceConnectProcess.tunnelId, function (err, res, body) {
+              utils.getTunnel(sauceConnectProcess.tunnelId, function (err, res, body) {
                 expect(err).to.not.be.ok();
                 expect(res.statusCode).to.be(200);
                 expect(body.status).to.eql("terminated");
