@@ -191,6 +191,10 @@ make test
 
 ## Changelog
 
+### v1.2.2
+
+- Fix error when using custom exe option (#127)
+
 ### v1.2.1
 
 - Fix getting tunnel id for Sauce Connect 4.4 (#123)
