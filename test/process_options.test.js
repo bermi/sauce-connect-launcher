@@ -72,7 +72,8 @@ describe("processOptions", function () {
       downloadRetries: 1,
       downloadRetryTimeout: 1000,
       detached: true,
-      connectVersion: "1.2.3"
+      connectVersion: "1.2.3",
+      exe: "/opt/sc-4.3.12-linux/bin/sc"
     })).to.eql([]);
   });
 
