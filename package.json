@@ -27,7 +27,7 @@
     "adm-zip": "~0.4.3",
     "async": "^2.1.2",
     "https-proxy-agent": "~1.0.0",
-    "lodash": "^4.16.6",
+    "lodash": "^4.17.4",
     "rimraf": "^2.5.4"
   },
   "devDependencies": {
