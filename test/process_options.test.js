@@ -82,4 +82,20 @@ describe("processOptions", function () {
     expect(result).to.eql(["-vv"]);
   });
 
+  it("should handle single-letter flag without changing to kebab-case", function() {
+    var result = processOptions({
+      B: "all",
+      "-N": true
+    });
+    expect(result).to.eql(["-B", "all", "-N"]);
+  });
+
+  it("should pass flags starting with dash with no changes", function() {
+    var result = processOptions({
+      "-SomeOptionWithDash": true,
+      "--SomeOptionWithTwoDashes": "foo"
+    });
+    expect(result).to.eql(["-SomeOptionWithDash", "--SomeOptionWithTwoDashes", "foo"]);
+  });
+
 });
