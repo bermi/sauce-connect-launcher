@@ -1,5 +1,6 @@
 .DS_Store
 .tags
+.idea
 lib-cov/
 sc/*
 test/coverage.html

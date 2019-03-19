@@ -1,11 +1,12 @@
 "use strict";
 
 var https = require("https");
+const SAUCE_API_HOST = process.env["SAUCE_API_HOST"] || "saucelabs.com";
 
 function sauceApiRequest(path, cb) {
   https.request({
     method: "GET",
-    host: "saucelabs.com",
+    host: SAUCE_API_HOST,
     port: 443,
     auth: process.env.SAUCE_USERNAME + ":" + process.env.SAUCE_ACCESS_KEY,
     path: "/rest/v1/" + path
