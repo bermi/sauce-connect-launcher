@@ -19,7 +19,7 @@
   },
   "scripts": {
     "postinstall": "node scripts/install.js || nodejs scripts/install.js",
-    "test": "make test",
+    "test": "jest --testPathPattern='^((?!tests/).)*.test.js$' --coverage",
     "version": "git add README.md",
     "lint": "make lint"
   },
@@ -32,8 +32,7 @@
   },
   "devDependencies": {
     "colors": "~1.1.2",
-    "eslint-plugin-mocha": "^4.8.0",
-    "expect.js": "~0.3.1",
+    "eslint-plugin-jest": "^22.11.1",
     "grunt": "~0.4.1",
     "grunt-cli": "~0.1.9",
     "grunt-contrib-watch": "~0.6.1",
@@ -41,7 +40,7 @@
     "grunt-notify": "~0.4.0",
     "grunt-release": "~0.13.0",
     "grunt-simple-mocha": "~0.4.0",
-    "mocha": "^3.1.2"
+    "jest": "^24.8.0"
   },
   "engines": {
     "node": ">= 4"

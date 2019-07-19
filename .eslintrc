@@ -1,13 +1,14 @@
 {
   "env": {
-    "mocha": true,
-    "node": true
+    "node": true,
+    "jest": true,
+    "es6": true
   },
   "parserOptions": {
     "ecmaVersion": 6
   },
   "plugins": [
-    "mocha"
+    "jest"
   ],
   "globals": {},
   "rules": {
@@ -45,7 +46,6 @@
       2,
       "double"
     ],
-    "strict": 2,
-    "mocha/no-exclusive-tests": "error"
+    "strict": 2
   }
 }

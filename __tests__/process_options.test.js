@@ -1,38 +1,37 @@
 "use strict";
 
-var processOptions = require("../lib/process_options.js");
-var expect = require("expect.js");
+const processOptions = require("../lib/process_options.js");
 
 describe("processOptions", function () {
   var prevUser, prevKey;
 
-  before(function () {
+  beforeAll(function () {
     prevUser = process.env.SAUCE_USERNAME;
     prevKey = process.env.SAUCE_ACCESS_KEY;
     delete process.env.SAUCE_USERNAME;
     delete process.env.SAUCE_ACCESS_KEY;
   });
 
-  after(function () {
+  afterAll(function () {
     process.env.SAUCE_USERNAME = prevUser;
     process.env.SAUCE_ACCESS_KEY = prevKey;
   });
 
-  it("should process user and password", function () {
+  it("should process user and password",  () =>  {
     var result = processOptions({username: "bermi", accessKey: "1234"});
-    expect(result).to.be.an(Array);
-    expect(result).to.eql([
+    expect(Array.isArray(result)).toBe(true);
+    expect(result).toEqual([
       "-u", "bermi",
       "-k", "1234"
     ]);
   });
 
-  it("should process user and password as env vars", function () {
+  it("should process user and password as env vars",  () =>{
     process.env.SAUCE_USERNAME = "bermi";
     process.env.SAUCE_ACCESS_KEY = "1234";
     var result = processOptions({});
-    expect(result).to.be.an(Array);
-    expect(result).to.eql([
+    expect(Array.isArray(result)).toBe(true);
+    expect(result).toEqual([
       "-u", "bermi",
       "-k", "1234"
     ]);
@@ -40,29 +39,29 @@ describe("processOptions", function () {
     delete process.env.SAUCE_ACCESS_KEY;
   });
 
-  it("should handle proxy ports", function () {
-    expect(processOptions({port: 1234})).to.eql(["-P", 1234]);
+  it("should handle proxy ports", () => {
+    expect(processOptions({port: 1234})).toEqual(["-P", 1234]);
   });
 
-  it("should handle boolean flags", function () {
+  it("should handle boolean flags",  () =>  {
     var result = processOptions({doctor: true});
-    expect(result).to.eql(["--doctor"]);
+    expect(result).toEqual(["--doctor"]);
   });
 
-  it("should handle array values", function () {
+  it("should handle array values",  () => {
     var result = processOptions({directDomains: ["google.com", "asdf.com"]});
-    expect(result).to.eql(["--direct-domains", "google.com,asdf.com"]);
+    expect(result).toEqual(["--direct-domains", "google.com,asdf.com"]);
   });
 
-  it("should handle future options", function () {
+  it("should handle future options",  () => {
     var result = processOptions({
       someFutureOption: "asdf",
       futureBoolean: true
     });
-    expect(result).to.eql(["--some-future-option", "asdf", "--future-boolean"]);
+    expect(result).toEqual(["--some-future-option", "asdf", "--future-boolean"]);
   });
 
-  it("should omit special launcher flags", function () {
+  it("should omit special launcher flags",  () => {
     expect(processOptions({
       readyFileId: "1",
       verbose: true,
@@ -74,28 +73,28 @@ describe("processOptions", function () {
       detached: true,
       connectVersion: "1.2.3",
       exe: "/opt/sc-4.3.12-linux/bin/sc"
-    })).to.eql([]);
+    })).toEqual([]);
   });
 
-  it("should handle 'vv' flag", function() {
+  it("should handle 'vv' flag", () => {
     var result = processOptions({vv: true});
-    expect(result).to.eql(["-vv"]);
+    expect(result).toEqual(["-vv"]);
   });
 
-  it("should handle single-letter flag without changing to kebab-case", function() {
+  it("should handle single-letter flag without changing to kebab-case", () => {
     var result = processOptions({
       B: "all",
       "-N": true
     });
-    expect(result).to.eql(["-B", "all", "-N"]);
+    expect(result).toEqual(["-B", "all", "-N"]);
   });
 
-  it("should pass flags starting with dash with no changes", function() {
+  it("should pass flags starting with dash with no changes", () => {
     var result = processOptions({
       "-SomeOptionWithDash": true,
       "--SomeOptionWithTwoDashes": "foo"
     });
-    expect(result).to.eql(["-SomeOptionWithDash", "--SomeOptionWithTwoDashes", "foo"]);
+    expect(result).toEqual(["-SomeOptionWithDash", "--SomeOptionWithTwoDashes", "foo"]);
   });
 
 });
