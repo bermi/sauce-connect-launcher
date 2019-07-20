@@ -7,9 +7,6 @@
   "parserOptions": {
     "ecmaVersion": 6
   },
-  "plugins": [
-    "jest"
-  ],
   "globals": {},
   "rules": {
     "no-bitwise": 2,

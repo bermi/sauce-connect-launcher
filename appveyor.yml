@@ -2,12 +2,13 @@
 environment:
   SAUCE_USERNAME: sc-launcher-ci
   SAUCE_ACCESS_KEY: 9f0d1fc0-df51-4863-9761-7879fa9ff844
+  SAUCE_API_HOST: eu-central-1.saucelabs.com
   VERBOSE_TESTS: 1
 
 # Install scripts. (runs after repo cloning)
 install:
   # Get the latest stable version of nodejs
-  - ps: Install-Product node 4
+  - ps: Install-Product node 8
   - npm version
   - npm config set spin false
   - appveyor-retry npm install

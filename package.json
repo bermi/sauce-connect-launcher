@@ -19,7 +19,7 @@
   },
   "scripts": {
     "postinstall": "node scripts/install.js || nodejs scripts/install.js",
-    "test": "jest --testPathPattern='^((?!tests/).)*.test.js$' --coverage",
+    "test": "jest --forceExit",
     "version": "git add README.md",
     "lint": "make lint"
   },
@@ -32,18 +32,17 @@
   },
   "devDependencies": {
     "colors": "~1.1.2",
-    "eslint-plugin-jest": "^22.11.1",
     "grunt": "~0.4.1",
     "grunt-cli": "~0.1.9",
     "grunt-contrib-watch": "~0.6.1",
     "grunt-eslint": "^19.0.0",
     "grunt-notify": "~0.4.0",
-    "grunt-release": "~0.13.0",
+    "grunt-release": "^0.14.0",
     "grunt-simple-mocha": "~0.4.0",
     "jest": "^24.8.0"
   },
   "engines": {
-    "node": ">= 4"
+    "node": ">= 8"
   },
   "sauceConnectLauncher": {
     "scVersion": "latest"
