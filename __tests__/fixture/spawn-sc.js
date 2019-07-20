@@ -9,6 +9,5 @@ sauceConnectLauncher(options, function (err)  {
   if (err) {
     throw err;
   }
-
   process.exit(0);
 });

@@ -19,7 +19,7 @@
   },
   "scripts": {
     "postinstall": "node scripts/install.js || nodejs scripts/install.js",
-    "test": "jest --testPathPattern='^((?!tests/).)*.test.js$' --coverage",
+    "test": "jest",
     "version": "git add README.md",
     "lint": "make lint"
   },
