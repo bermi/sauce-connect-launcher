@@ -10,7 +10,6 @@ process.env.SAUCE_USERNAME = options.username;
 
 sauceConnectLauncher(options, function (err)  {
   if (err) {
-    console.log(err);
     throw err;
   }
   process.exit(0);

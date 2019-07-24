@@ -1,12 +1,16 @@
 {
   "env": {
     "node": true,
+    "mocha": true,
     "jest": true,
     "es6": true
   },
   "parserOptions": {
     "ecmaVersion": 6
   },
+  "plugins": [
+    "mocha"
+  ],
   "globals": {},
   "rules": {
     "no-bitwise": 2,
@@ -43,6 +47,7 @@
       2,
       "double"
     ],
-    "strict": 2
+    "strict": 2,
+    "mocha/no-exclusive-tests": "error"
   }
 }

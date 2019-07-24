@@ -19,7 +19,7 @@
   },
   "scripts": {
     "postinstall": "node scripts/install.js || nodejs scripts/install.js",
-    "test": "jest --forceExit",
+    "test": "make test && jest",
     "version": "git add README.md",
     "lint": "make lint"
   },
@@ -39,10 +39,11 @@
     "grunt-notify": "~0.4.0",
     "grunt-release": "^0.14.0",
     "grunt-simple-mocha": "~0.4.0",
-    "jest": "^24.8.0"
+    "jest": "^24.8.0",
+    "mocha": "^3.1.2"
   },
   "engines": {
-    "node": ">= 8"
+    "node": ">= 4"
   },
   "sauceConnectLauncher": {
     "scVersion": "latest"
