@@ -1,11 +1,9 @@
 "use strict";
 
-var tryRun = require("../lib/try_run");
-var expect = require("expect.js");
+const tryRun = require("../lib/try_run");
 
 describe("tryRun", function () {
   var innerErr = new Error("Inner function failed");
-
   describe("without configured retry", function () {
     it("calls the provided function once", function (done) {
       var innerCalls = 0;
@@ -13,8 +11,8 @@ describe("tryRun", function () {
         innerCalls += 1;
         callback(innerErr);
       }, function (err) {
-        expect(innerCalls).to.equal(1);
-        expect(err).to.equal(innerErr);
+        expect(innerCalls).toEqual(1);
+        expect(err).toEqual(innerErr);
         done();
       });
     });
@@ -32,8 +30,8 @@ describe("tryRun", function () {
         innerCalls += 1;
         callback(null);
       }, function (err) {
-        expect(err).to.not.be.ok();
-        expect(innerCalls).to.be(1);
+        expect(err).toBeFalsy();
+        expect(innerCalls).toEqual(1);
         done();
       });
     });
@@ -44,8 +42,8 @@ describe("tryRun", function () {
         innerCalls += 1;
         callback(innerErr);
       }, function (err) {
-        expect(err).to.equal(innerErr);
-        expect(innerCalls).to.be(3);
+        expect(err).toEqual(innerErr);
+        expect(innerCalls).toEqual(3);
         done();
       });
     });
@@ -56,7 +54,7 @@ describe("tryRun", function () {
         callback(innerErr);
       }, function () {
         var end = Date.now();
-        expect(end - start).greaterThan(19); // Double timeout-1
+        expect(end - start).toBeGreaterThan(19); // Double timeout-1
         done();
       });
     });
