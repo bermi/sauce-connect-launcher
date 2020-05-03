@@ -243,7 +243,6 @@ describe("Sauce Connect Launcher", function () {
       var options = _.clone(sauceCreds);
       options.detached = true;
       options.pidfile = pidfile;
-      options.connectVersion = "4.4.12";
       delete options.logger;
 
       var args = [ path.join(__dirname, "./fixture/spawn-sc.js"), JSON.stringify(options) ];
@@ -280,9 +279,9 @@ describe("Sauce Connect Launcher", function () {
               done();
               /*
               Commenting as removal of .pid by saucelabs is not guaranteed.
-              https://wiki.saucelabs.com/display/DOCS/Sauce+Connect+Command+Line+Reference           
+              https://wiki.saucelabs.com/display/DOCS/Sauce+Connect+Command+Line+Reference
               fs.readFile(pidfile, function (err) {
-                expect(err).to.be.ok(); 
+                expect(err).to.be.ok();
                 expect(err.code).to.eql("ENOENT");
                 done();
               });*/
